@@ -22,6 +22,7 @@ module FbAppTests
   def check_atc_optin_window? url:
     @result = {}
     navigate_to_atc_optin(url)
+    snap("Optin window")
     @result['optin_window_rendered'] =
       !find('.ba-fb-add-tc-popup__container').inspect.strip.empty?
     @result['send_to_messenger_button_rendered'] =
@@ -32,11 +33,13 @@ module FbAppTests
   def check_atc_optin_ignored_behaviour? url:
     @result = {}
     navigate_to_atc_optin(url)
+    snap("Optin window")
     @result['optin_window_rendered'] =
       !find('.ba-fb-add-tc-popup__container').inspect.strip.empty?
     find(".ba-fb-add-tc-popup__close", match: :first)
     find('button', class: 'ba-fb-add-tc-popup__close').click
     find(".cart", match: :first)
+    snap("Cart page")
     @result['navigates_to_cart_if closed_by_x'] = current_url.include? 'cart'
     navigate_to_atc_optin(url)
     find(".ba-fb-add-tc-pop-footer", match: :first)
