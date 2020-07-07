@@ -19,6 +19,32 @@ module FbAppTests
     @result.all?{|_,v| v}
   end
 
+  def check_popup_optin_behaviour? url:
+    @result = {}
+    navigate_to_cleared_url(url)
+    find('.fb-send-to-messenger', match: :first)
+    @result['popup_optin_rendered'] =
+      find('.fb-send-to-messenger')['fb-xfbml-state'] == 'rendered'
+    snap("Popup optin window")
+    find('.ba-modal-close', match: :first).click
+    sleep(1)
+    snap("Popup optin window closed")
+    @result['popup_optin_closed_by_x'] = begin
+      find('.fb-send-to-messenger', match: :first)
+    rescue
+      true
+    end
+    navigate_to_cleared_url(url)
+    within_frame(find('[title="fb:send_to_messenger Facebook Social Plugin"]', match: :first)) do
+      sleep(5)
+      find('span', text: 'Send to Messenger', match: :first).click
+    end
+    @result['popup_optin_excepted'] =
+      !find('#ba-fb-modal-desc', match: :first).inspect.strip.empty?
+    snap("Popup optin excepted")
+    @result.all?{|_,v| v}
+  end
+
   def check_atc_optin_window? url:
     @result = {}
     navigate_to_atc_optin(url)
@@ -51,9 +77,13 @@ module FbAppTests
 
   private
 
-  def navigate_to_atc_optin url
+  def navigate_to_cleared_url url
     cleanup!
     visit(url)
+  end
+
+  def navigate_to_atc_optin url
+    navigate_to_cleared_url(url)
     find(".ba-modal-close", match: :first).click
     find("#AddToCart-product-template", match: :first).click
     find(".ba-fb-add-tc-popup__container", match: :first)
