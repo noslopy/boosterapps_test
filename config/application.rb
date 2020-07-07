@@ -2,6 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 #require 'rails/all'
 require 'action_controller/railtie'
+require 'sequel'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -12,6 +13,8 @@ end
 
 module BaTest
   class Application < Rails::Application
+
+    Sequel.connect(ENV.fetch("DATABASE_URL"))
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
