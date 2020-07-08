@@ -25,6 +25,9 @@ gem 'sidekiq'
 gem 'sidekiq-status'
 gem 'sidekiq-failures'
 
+gem 'sequel'
+gem 'pg'
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
