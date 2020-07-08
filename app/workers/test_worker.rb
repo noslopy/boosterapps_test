@@ -13,6 +13,7 @@ class TestWorker
     result       = test_manager.execute_test(params["test_method"], params) || {}
     Rails.logger.info "Test done #=#{result}"
     CapybaraTestManager.set_result(params,result)
+    BrowserResult.create(data: { params: params, result: result }.to_json)
   end
 
 end
