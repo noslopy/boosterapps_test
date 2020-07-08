@@ -134,6 +134,13 @@ class CapybaraTestManager
     @result["screenshots"] << {s3url: url,title:  title}
   end
 
+  def snap(title = nil)
+    time = Time.now.to_i
+    relative_path    = "tmp/screenshot_#{time}_#{rand(1000)}.png"
+    path  = Rails.root.to_s + "/" + relative_path
+    save_screenshot(relative_path)
+  end
+
 
   def upload_to_s3 image_path,relative_path
     s3 = Aws::S3::Resource.new(region:'us-east-1')
