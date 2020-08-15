@@ -1,4 +1,12 @@
-DATABASE_URL: postgres://admin:admin@localhost:5432/ba_test
-SMTP_USERNAME:
-SMTP_PASSWORD:
-ALERT_RECIPIENT:
+test:
+  DATABASE_URL: postgres://admin:admin@localhost:5432/ba_test_test
+  SMTP_USERNAME:
+  SMTP_PASSWORD:
+  ALERT_RECIPIENT:
+
+development:
+  DATABASE_URL: postgres://admin:admin@localhost:5432/ba_test_dev
+  SMTP_USERNAME:
+  SMTP_PASSWORD:
+  ALERT_RECIPIENT:
+

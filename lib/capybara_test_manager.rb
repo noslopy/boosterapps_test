@@ -137,9 +137,11 @@ class CapybaraTestManager
 
   def snap(title = nil)
     time = Time.now.to_i
-    relative_path    = "tmp/screenshot_#{time}_#{rand(1000)}.png"
+    relative_path    = "tmp/screenshot_#{time}_#{title.underscore}_#{rand(1000)}.png"
     path  = Rails.root.to_s + "/" + relative_path
     save_screenshot(relative_path)
+    @result["screenshots"] ||= []
+    @result["screenshots"] << { title: title, path: relative_path }
   end
 
 

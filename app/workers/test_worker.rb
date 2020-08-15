@@ -15,7 +15,7 @@ class TestWorker
     CapybaraTestManager.set_result(params,result)
     BrowserResult.create(data: { params: params, result: result }.to_json)
     CapybaraTestManager.send_alert({ params: params, result: result }.to_json) \
-      unless result['error_msg'].nil?
+      unless result['error_msg'].nil? && result['presence']
   end
 
 end
