@@ -28,6 +28,8 @@ gem 'sidekiq-failures'
 gem 'sequel'
 gem 'pg'
 
+gem 'pony'
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'

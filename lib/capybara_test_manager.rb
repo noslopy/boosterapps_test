@@ -7,6 +7,7 @@ require 'capybara'
 require 'capybara/dsl'
 require 'selenium-webdriver'
 require 'aws-sdk-s3'
+require 'pony'
 
 
 TEST_MODULES = [
@@ -222,6 +223,14 @@ class CapybaraTestManager
     key        = test_key(params)
     result_str = $redis.get(key)
     result     = result_str.tap{|r| Rails.logger.info "RESULT=#{r}"}.present? ? JSON.parse(result_str) : result_str
+  end
+
+  def self.send_alert(params)
+    Pony.mail(
+      :to => ENV.fetch('ALERT_RECIPIENT'),
+      :subject => 'ALERT',
+      :body => params.to_s
+    )
   end
 
   def self.register_drivers

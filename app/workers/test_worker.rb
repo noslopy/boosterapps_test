@@ -14,6 +14,8 @@ class TestWorker
     Rails.logger.info "Test done #=#{result}"
     CapybaraTestManager.set_result(params,result)
     BrowserResult.create(data: { params: params, result: result }.to_json)
+    CapybaraTestManager.send_alert({ params: params, result: result }.to_json) \
+      unless result['error_msg'].nil?
   end
 
 end

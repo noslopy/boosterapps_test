@@ -123,6 +123,8 @@ GEM
     numerizer (0.1.1)
     oj (3.10.6)
     pg (1.2.3)
+    pony (1.13.1)
+      mail (>= 2.0)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -268,6 +270,7 @@ DEPENDENCIES
   nokogiri
   oj
   pg
+  pony
   pry-rails
   puma
   rabl

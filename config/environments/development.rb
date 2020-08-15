@@ -1,3 +1,5 @@
+require 'pony'
+
 BaTest::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -23,5 +25,17 @@ BaTest::Application.configure do
 
   config.eager_load = false
 
+  Pony.options = {
+    :from => 'info@ba-test.com',
+    :via => :smtp,
+    :via_options => {
+      :user_name  =>  ENV.fetch('SMTP_USERNAME'),
+      :password   =>  ENV.fetch('SMTP_PASSWORD'),
+      :address    =>  'smtp.mailtrap.io',
+      :domain     =>  'smtp.mailtrap.io',
+      :port       =>  '2525',
+      :authentication => :cram_md5
+    }
+  }
 
 end
