@@ -9,7 +9,7 @@ require "bugsnag/integrations/rake"
 #load 'tasks/emoji.rake'
 
 Bugsnag.configure do |config|
-  config.api_key = "e7b66c65de77c08a3354c405fb82b84c"
+  config.api_key = ENV.fetch["BUGSNAG_API_KEY"]
 end
 
 namespace :db do
